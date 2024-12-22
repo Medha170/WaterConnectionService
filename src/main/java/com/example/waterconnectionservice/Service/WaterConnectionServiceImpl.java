@@ -23,14 +23,13 @@ public class WaterConnectionServiceImpl implements WaterConnectionService{
     }
 
     @Override
-    public Optional<WaterConnection> getWaterConnectionById(Long id){
-        return waterConnectionRepository.findById(id);
+    public Optional<WaterConnection> getWaterConnectionByPropertyId(Long propertyId) {
+        return waterConnectionRepository.findByPropertyId(propertyId);
     }
 
     @Override
-    public WaterConnection updateWaterConnection(Long id, WaterConnection waterConnection){
-        return waterConnectionRepository.findById(id).map(existingConnection -> {
-            existingConnection.setPropertyId(waterConnection.getPropertyId());
+    public WaterConnection updateWaterConnectionByPropertyId(Long propertyId, WaterConnection waterConnection) {
+        return waterConnectionRepository.findByPropertyId(propertyId).map(existingConnection -> {
             existingConnection.setDescription(waterConnection.getDescription());
             return waterConnectionRepository.save(existingConnection);
         }).orElseThrow(() -> new RuntimeException("Connection not found"));

@@ -15,7 +15,7 @@ public class WaterConnectionController {
         this.waterConnectionService = waterConnectionService;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<WaterConnection> createWaterConnection(@RequestBody WaterConnection waterConnection){
         if (waterConnection.getPropertyId() == null){
             return ResponseEntity.badRequest().build();
@@ -24,18 +24,21 @@ public class WaterConnectionController {
         return ResponseEntity.status(201).body(createdConnection);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<WaterConnection> getWaterConnection(@PathVariable("id") Long id) {
-        return waterConnectionService.getWaterConnectionById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{propertyId}")
+    public ResponseEntity<WaterConnection> getWaterConnectionByPropertyId(@PathVariable("propertyId") Long propertyId) {
+        return waterConnectionService.getWaterConnectionByPropertyId(propertyId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<WaterConnection> updateWaterConnection(@PathVariable("id") Long id, @RequestBody WaterConnection waterConnection){
-        try{
-            WaterConnection updateConnection = waterConnectionService.updateWaterConnection(id, waterConnection);
-            return ResponseEntity.ok(updateConnection);
-        }
-        catch (RuntimeException e){
+    @PutMapping("/{propertyId}")
+    public ResponseEntity<WaterConnection> updateWaterConnectionByPropertyId(
+            @PathVariable("propertyId") Long propertyId,
+            @RequestBody WaterConnection waterConnection) {
+        try {
+            WaterConnection updatedConnection = waterConnectionService.updateWaterConnectionByPropertyId(propertyId, waterConnection);
+            return ResponseEntity.ok(updatedConnection);
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }

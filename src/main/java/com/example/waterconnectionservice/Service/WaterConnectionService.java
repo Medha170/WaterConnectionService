@@ -8,8 +8,8 @@ public interface WaterConnectionService {
 
     WaterConnection createWaterConnection(WaterConnection waterConnection);
 
-    Optional<WaterConnection> getWaterConnectionById(Long id);
+    Optional<WaterConnection> getWaterConnectionByPropertyId(Long propertyId);
 
-    WaterConnection updateWaterConnection(Long id, WaterConnection waterConnection);
+    WaterConnection updateWaterConnectionByPropertyId(Long id, WaterConnection waterConnection);
 
 }

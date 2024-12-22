@@ -9,15 +9,17 @@ public class WaterConnection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "water_connection_id", nullable = false, unique = true)
     private String waterConnectionId = UUID.randomUUID().toString(); // Automatically set UUID
-
-    @Column(name = "property_id", nullable = false)
     private Long propertyId;
-
-    @Column(name = "description")
     private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getWaterConnectionId() {
         return waterConnectionId;

@@ -11,4 +11,7 @@ public interface WaterConnectionRepository extends JpaRepository<WaterConnection
 
     @Override
     WaterConnection save(WaterConnection waterConnection);
+
+    Optional<WaterConnection> findByPropertyId(Long propertyId);
+
 }
